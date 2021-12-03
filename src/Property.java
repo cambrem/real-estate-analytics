@@ -2,17 +2,31 @@ public class Property{
     private String address;
     private String type;
     private int units;
-    private int purchasePrice;
-    private int monthlyRent;
-    private int propertyTax;
+    private double purchasePrice;
 
-    public Property(String address, String type, int units, int purchasePrice, int monthlyRent, int propertyTax) {
+    // income
+    private double rent;
+
+    // monthly expenses
+    private double propertyTax;
+    private double insurance;
+    private double vacancy;
+    private double repairs;
+    private double capX;
+    private double mortgage;
+
+
+    public Property(String address, String type, int units, double purchasePrice, double rent) {
         this.address = address;
         this.type = type;
         this.units = units;
         this.purchasePrice = purchasePrice;
-        this.monthlyRent = monthlyRent;
-        this.propertyTax = propertyTax;
+        this.rent = rent;
+        this.propertyTax = purchasePrice * 0.0186 / 12;
+        this.insurance = purchasePrice * 0.01 / 12;
+        this.vacancy = rent * 0.05;
+        this.capX = 182.75;
+        this.mortgage = 0.8*purchasePrice/(30*12);
     }
 
     public String getAddress() {
@@ -39,7 +53,7 @@ public class Property{
         this.units = units;
     }
 
-    public int getPurchasePrice() {
+    public double getPurchasePrice() {
         return purchasePrice;
     }
 
@@ -47,15 +61,15 @@ public class Property{
         this.purchasePrice = purchasePrice;
     }
 
-    public int getMonthlyRent() {
-        return monthlyRent;
+    public double getRent() {
+        return rent;
     }
 
-    public void setMonthlyRent(int monthlyRent) {
-        this.monthlyRent = monthlyRent;
+    public void setRent(int rent) {
+        this.rent = rent;
     }
 
-    public int getPropertyTax() {
+    public double getPropertyTax() {
         return propertyTax;
     }
 
@@ -63,12 +77,52 @@ public class Property{
         this.propertyTax = propertyTax;
     }
 
+    public double getInsurance() {
+        return insurance;
+    }
+
+    public void setInsurance(double insurance) {
+        this.insurance = insurance;
+    }
+
+    public double getVacancy() {
+        return vacancy;
+    }
+
+    public void setVacancy(double vacancy) {
+        this.vacancy = vacancy;
+    }
+
+    public double getRepairs() {
+        return repairs;
+    }
+
+    public void setRepairs(double repairs) {
+        this.repairs = repairs;
+    }
+
+    public double getCapX() {
+        return capX;
+    }
+
+    public void setCapX(double capX) {
+        this.capX = capX;
+    }
+
+    public double getMortgage() {
+        return mortgage;
+    }
+
+    public void setMortgage(double mortgage) {
+        this.mortgage = mortgage;
+    }
+
     public String toString(){
-        return address + " " + type + " " + units + " " + purchasePrice + " " + monthlyRent + " " + propertyTax;
+        return address + " " + type + " " + units + " " + purchasePrice + " " + rent + " " + propertyTax;
     }
 
     public static void main(String [] args){
-        Property p1 = new Property("304 North Street", "Multifamily", 4, 400_000, 6_000, 7_440);
+        Property p1 = new Property("304 North Street", "Multifamily", 4, 400_000, 6_000);
         System.out.println(p1);
     }
 }
