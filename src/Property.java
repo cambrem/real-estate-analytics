@@ -68,7 +68,7 @@ public class Property{
     }
 
     public static void main(String [] args){
-        Property p1 = new Property("304 North Street", "Multifamily", 4, 400_000, 6_000, 7_740);
+        Property p1 = new Property("304 North Street", "Multifamily", 4, 400_000, 6_000, 7_440);
         System.out.println(p1);
     }
 }
