@@ -118,11 +118,6 @@ public class Property{
     }
 
     public String toString(){
-        return address + " " + type + " " + units + " " + purchasePrice + " " + rent + " " + propertyTax;
-    }
-
-    public static void main(String [] args){
-        Property p1 = new Property("304 North Street", "Multifamily", 4, 400_000, 6_000);
-        System.out.println(p1);
+        return "Address: " + address + "\nType: " + type + "\nUnits: " + units + "\nPurchase Price: $" + purchasePrice + "\nRent: $" + rent;
     }
 }
