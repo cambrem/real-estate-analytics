@@ -13,6 +13,25 @@ public class Portfolio {
         }
     }
 
+    public void calculateMonthlyExpenses(){
+        for(Property p : properties){
+            expenses += p.getPropertyTax();
+            expenses += p.getInsurance();
+            expenses += p.getVacancy();
+            expenses += p.getRepairs();
+            expenses += p.getCapX();
+        }
+    }
+
+    public double calculateMortgagePayment(Property prop, int month){
+        double totalPayment = prop.getMortgage();
+        for(int i = 0; i <= prop.getMortgageLength(); i++){
+            totalPayment *= prop.getMortgageInterestRate();
+        }
+        double mortgagePayment = totalPayment / prop.getMortgageLength();
+        return mortgagePayment;
+    }
+
     public double getExpenses() {
         return expenses;
     }
@@ -46,9 +65,13 @@ public class Portfolio {
     }
 
     //runSimulation(int years)
+    //breakEven()
+    //
 
     public static void main(String [] args){
         Property NorthSt = new Property("304 North Street", "Multifamily", 4, 400_000, 5_000);
+        NorthSt.setDownPayment(40_000);
+        NorthSt.setMortgageInterestRate(10);
         Portfolio myPortfolio = new Portfolio(NorthSt);
         System.out.println(myPortfolio);
     }
