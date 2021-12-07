@@ -39,10 +39,12 @@ public class Portfolio {
         for(Property p : properties){
             if(p.getMortgageRemaining()>0){
                 totalPropertyPayment = p.getMortgage();
+                /*
                 for(int i = 1; i <= p.getMortgageLength(); i++){
                     totalPropertyPayment*= (1 + p.getMortgageInterestRate()/100);
                     //System.out.println("Property payment: " + propertyPayment);
                 }
+                */
                 propertyPayment = totalPropertyPayment / (p.getMortgageLength()*12);
                 monthlyPayment += propertyPayment;
             }
@@ -92,13 +94,13 @@ public class Portfolio {
             System.out.println("\nYear " + i + "\n-----");
             for(int j = 1; j <= 12; j++) {
                 mortgagePayment = calculateMortgagePayment(12);
-                System.out.println(mortgagePayment);
+                System.out.println("Mortgage payment: " + mortgagePayment);
                 setCashFlow(this.income, this.expenses, mortgagePayment);
                 profit += cashFlow;
                 for(Property p : properties){
                     p.payDownMortgage(mortgagePayment);
                 }
-                System.out.printf("Month " + (12*(i-1)+j) + ":  Cash flow: $%.2f   Profit from original investment: $%.2f", cashFlow, profit);
+                System.out.printf("Month " + (12*(i-1)+j) + ":  Cash flow: $%.2f   Profit on original investment: $%.2f", cashFlow, profit);
                 for(Property p : properties){
                     System.out.printf("   Equity: $%.2f   Mortgage remaining: $%.2f", p.getEquity(), p.getMortgageRemaining());
                     System.out.println();
@@ -111,7 +113,7 @@ public class Portfolio {
         Property NorthSt = new Property("304 North Street", "Multifamily", 4, 400_000, 5_000);
         NorthSt.setDownPayment(40_000);
         NorthSt.setMortgageInterestRate(1);
-        NorthSt.setMortgageLength(30);
+        NorthSt.setMortgageLength(10);
         Portfolio myPortfolio = new Portfolio(NorthSt);
         //System.out.println(myPortfolio);
         myPortfolio.runSimulation(30);
