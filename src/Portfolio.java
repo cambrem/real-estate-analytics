@@ -33,23 +33,21 @@ public class Portfolio {
     }
 
     public double calculateMortgagePayment(int month){
-        double annualPayment = 0;
+        double monthlyPayment = 0;
+        double totalPropertyPayment;
         double propertyPayment = 0;
         for(Property p : properties){
             if(p.getMortgageRemaining()>0){
-                propertyPayment = p.getMortgage();
-                System.out.println("Property payment: " + propertyPayment);
+                totalPropertyPayment = p.getMortgage();
                 for(int i = 1; i <= p.getMortgageLength(); i++){
-                    propertyPayment *= (1 + p.getMortgageInterestRate()/100);
-                    System.out.println("Property payment: " + propertyPayment);
-
+                    totalPropertyPayment*= (1 + p.getMortgageInterestRate()/100);
+                    //System.out.println("Property payment: " + propertyPayment);
                 }
-                annualPayment += propertyPayment / p.getMortgageLength();
-                p.payDownMortgage(annualPayment);
-                p.increaseEquity(annualPayment);
+                propertyPayment = totalPropertyPayment / (p.getMortgageLength()*12);
+                monthlyPayment += propertyPayment;
             }
         }
-        return annualPayment;
+        return monthlyPayment;
     }
 
     public double getExpenses() {
@@ -72,8 +70,8 @@ public class Portfolio {
         return cashFlow;
     }
 
-    public void setCashFlow(double cashFlow) {
-        this.cashFlow = cashFlow;
+    public void setCashFlow(double income, double expenses, double mortgagePayment) {
+        this.cashFlow = income - expenses - mortgagePayment;
     }
 
     public String toString(){
@@ -87,19 +85,27 @@ public class Portfolio {
     public void runSimulation(int years){
         calculateMonthlyExpenses();
         calculateMonthlyIncome();
-        cashFlow = this.income - this.expenses;
-        System.out.println(cashFlow);
-        double profit = 0;
-        double mortgagePayment = calculateMortgagePayment(12);
-        System.out.println(mortgagePayment);
+        double profit = -investment;
+        double mortgagePayment;
         System.out.printf("\nInitial investment: $%.2f\n", investment);
         for(int i = 1; i <= years; i++){
-            profit = (i*cashFlow*12) - i*mortgagePayment - investment;
-            System.out.printf("\nYear " + i + "\n-----\nMonthly Cashflow: $%.2f\nProfit at year end: $%.2f\n", cashFlow - calculateMortgagePayment(i*12)/12, profit);
+            System.out.println("\nYear " + i + "\n-----");
+            for(int j = 1; j <= 12; j++) {
+                mortgagePayment = calculateMortgagePayment(12);
+                System.out.println(mortgagePayment);
+                setCashFlow(this.income, this.expenses, mortgagePayment);
+                profit += cashFlow;
+                for(Property p : properties){
+                    p.payDownMortgage(mortgagePayment);
+                }
+                System.out.printf("Month " + (12*(i-1)+j) + ":  Cash flow: $%.2f   Profit from original investment: $%.2f", cashFlow, profit);
+                for(Property p : properties){
+                    System.out.printf("   Equity: $%.2f   Mortgage remaining: $%.2f", p.getEquity(), p.getMortgageRemaining());
+                    System.out.println();
+                }
+            }
         }
     }
-    //breakEven()
-    //
 
     public static void main(String [] args){
         Property NorthSt = new Property("304 North Street", "Multifamily", 4, 400_000, 5_000);
@@ -108,7 +114,7 @@ public class Portfolio {
         NorthSt.setMortgageLength(30);
         Portfolio myPortfolio = new Portfolio(NorthSt);
         //System.out.println(myPortfolio);
-        myPortfolio.runSimulation(10);
+        myPortfolio.runSimulation(30);
 
     }
 }

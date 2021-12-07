@@ -72,6 +72,7 @@ public class Property{
 
     public void setDownPayment(int downPayment) {
         this.downPayment = downPayment;
+        this.equity = downPayment;
         this.mortgage = this.purchasePrice - downPayment;
         this.mortgageRemaining = getMortgage();
     }
@@ -148,8 +149,9 @@ public class Property{
         this.mortgageRemaining = mortgageRemaining;
     }
 
-    public void payDownMortgage(double number) {
-        this.mortgageRemaining -= number;
+    public void payDownMortgage(double amount) {
+        this.mortgageRemaining -= amount;
+        this.equity += amount;
     }
 
     public double getEquity() {
@@ -158,10 +160,6 @@ public class Property{
 
     public void setEquity(double equity) {
         this.equity = equity;
-    }
-
-    public void increaseEquity(double change) {
-        this.equity += change;
     }
 
     public int getMortgageLength() {
