@@ -38,8 +38,11 @@ public class Portfolio {
         for(Property p : properties){
             if(p.getMortgageRemaining()>0){
                 propertyPayment = p.getMortgage();
-                for(int i = 0; i <= p.getMortgageLength(); i++){
+                System.out.println("Property payment: " + propertyPayment);
+                for(int i = 1; i <= p.getMortgageLength(); i++){
                     propertyPayment *= (1 + p.getMortgageInterestRate()/100);
+                    System.out.println("Property payment: " + propertyPayment);
+
                 }
                 annualPayment += propertyPayment / p.getMortgageLength();
                 p.payDownMortgage(annualPayment);
@@ -85,8 +88,10 @@ public class Portfolio {
         calculateMonthlyExpenses();
         calculateMonthlyIncome();
         cashFlow = this.income - this.expenses;
+        System.out.println(cashFlow);
         double profit = 0;
         double mortgagePayment = calculateMortgagePayment(12);
+        System.out.println(mortgagePayment);
         System.out.printf("\nInitial investment: $%.2f\n", investment);
         for(int i = 1; i <= years; i++){
             profit = (i*cashFlow*12) - i*mortgagePayment - investment;
@@ -102,7 +107,7 @@ public class Portfolio {
         NorthSt.setMortgageInterestRate(1);
         NorthSt.setMortgageLength(30);
         Portfolio myPortfolio = new Portfolio(NorthSt);
-        System.out.println(myPortfolio);
+        //System.out.println(myPortfolio);
         myPortfolio.runSimulation(10);
 
     }

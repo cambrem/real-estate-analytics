@@ -31,7 +31,8 @@ public class Property{
         this.insurance = purchasePrice * 0.01 / 12;
         this.vacancy = rent * 0.05;
         this.repairs = 100;
-        this.capX = 182.75; }
+        this.capX = 182.75;
+    }
 
     public String getAddress() {
         return address;
@@ -72,6 +73,7 @@ public class Property{
     public void setDownPayment(int downPayment) {
         this.downPayment = downPayment;
         this.mortgage = this.purchasePrice - downPayment;
+        this.mortgageRemaining = getMortgage();
     }
 
     public double getRent() {
