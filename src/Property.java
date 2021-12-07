@@ -7,6 +7,8 @@ public class Property{
     private double mortgage;
     private double mortgageInterestRate;
     private int mortgageLength;
+    private double mortgageRemaining;
+    private double equity;
 
     // income
     private double rent;
@@ -134,6 +136,30 @@ public class Property{
 
     public void setMortgageInterestRate(double percent) {
         this.mortgageInterestRate = percent;
+    }
+
+    public double getMortgageRemaining() {
+        return mortgageRemaining;
+    }
+
+    public void setMortgageRemaining(double mortgageRemaining) {
+        this.mortgageRemaining = mortgageRemaining;
+    }
+
+    public void payDownMortgage(double number) {
+        this.mortgageRemaining -= number;
+    }
+
+    public double getEquity() {
+        return equity;
+    }
+
+    public void setEquity(double equity) {
+        this.equity = equity;
+    }
+
+    public void increaseEquity(double change) {
+        this.equity += change;
     }
 
     public int getMortgageLength() {
