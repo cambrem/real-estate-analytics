@@ -94,7 +94,6 @@ public class Portfolio {
             System.out.println("\nYear " + i + "\n-----");
             for(int j = 1; j <= 12; j++) {
                 mortgagePayment = calculateMortgagePayment(12);
-                System.out.println("Mortgage payment: " + mortgagePayment);
                 setCashFlow(this.income, this.expenses, mortgagePayment);
                 profit += cashFlow;
                 for(Property p : properties){
@@ -102,7 +101,7 @@ public class Portfolio {
                 }
                 System.out.printf("Month " + (12*(i-1)+j) + ":  Cash flow: $%.2f   Profit on original investment: $%.2f", cashFlow, profit);
                 for(Property p : properties){
-                    System.out.printf("   Equity: $%.2f   Mortgage remaining: $%.2f", p.getEquity(), p.getMortgageRemaining());
+                    System.out.printf("   Mortgage Payment: $%.2f   Equity: $%.2f   Mortgage remaining: $%.2f", mortgagePayment, p.getEquity(), p.getMortgageRemaining());
                     System.out.println();
                 }
             }
@@ -113,7 +112,7 @@ public class Portfolio {
         Property NorthSt = new Property("304 North Street", "Multifamily", 4, 400_000, 5_000);
         NorthSt.setDownPayment(40_000);
         NorthSt.setMortgageInterestRate(1);
-        NorthSt.setMortgageLength(10);
+        NorthSt.setMortgageLength(15);
         Portfolio myPortfolio = new Portfolio(NorthSt);
         //System.out.println(myPortfolio);
         myPortfolio.runSimulation(30);
