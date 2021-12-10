@@ -100,7 +100,7 @@ public class Portfolio {
 
     public static void main(String [] args){
         Property NorthSt = new Property("304 North Street", "Multifamily", 4, 400_000, 5_000);
-        NorthSt.setLoanDetails(40_000, 15, 0.07);
+        NorthSt.setLoanDetails(40_000, 15, 0.05);
         Portfolio myPortfolio = new Portfolio(NorthSt);
         //System.out.println(myPortfolio);
         myPortfolio.runSimulation(30);
