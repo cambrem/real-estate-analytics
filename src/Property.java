@@ -1,3 +1,4 @@
+
 public class Property{
     private String address;
     private String type;
@@ -5,9 +6,9 @@ public class Property{
     private double purchasePrice;
     private double downPayment;
     private double mortgage;
-    private double mortgageInterestRate;
+    private double interestRate;
     private int mortgageLength;
-    private double mortgageRemaining;
+    private double monthlyPayment;
     private double equity;
 
     // income
@@ -74,7 +75,6 @@ public class Property{
         this.downPayment = downPayment;
         this.equity = downPayment;
         this.mortgage = this.purchasePrice - downPayment;
-        this.mortgageRemaining = getMortgage();
     }
 
     public double getRent() {
@@ -133,24 +133,16 @@ public class Property{
         this.mortgage = mortgage;
     }
 
-    public double getMortgageInterestRate() {
-        return mortgageInterestRate;
+    public double getInterestRate() {
+        return interestRate;
     }
 
-    public void setMortgageInterestRate(double percent) {
-        this.mortgageInterestRate = percent;
-    }
-
-    public double getMortgageRemaining() {
-        return mortgageRemaining;
-    }
-
-    public void setMortgageRemaining(double mortgageRemaining) {
-        this.mortgageRemaining = mortgageRemaining;
+    public void setInterestRate(double interestRate) {
+        this.interestRate = interestRate;
     }
 
     public void payDownMortgage(double amount) {
-        this.mortgageRemaining -= amount;
+        this.mortgage -= amount;
         this.equity += amount;
     }
 
@@ -166,8 +158,28 @@ public class Property{
         return mortgageLength;
     }
 
+    public double getMonthlyPayment() {
+        return monthlyPayment;
+    }
+
+    public void setMonthlyPayment(double monthlyPayment) {
+        this.monthlyPayment = monthlyPayment;
+    }
+
     public void setMortgageLength(int mortgageLength) {
         this.mortgageLength = mortgageLength;
+    }
+
+    public void setLoanDetails(double downPayment, int mortgageLength, double interestRate){
+        this.downPayment = downPayment;
+        this.equity = downPayment;
+        this.mortgage = this.purchasePrice - downPayment;
+        this.mortgageLength = mortgageLength;
+        this.interestRate = interestRate;
+        double i = interestRate / 12;
+        int n = mortgageLength * 12;
+        monthlyPayment = getMortgage() * ((i*(Math.pow((1+i),n)))/(Math.pow((1+i),n)-1));
+        System.out.println(monthlyPayment);
     }
 
     public String toString(){
