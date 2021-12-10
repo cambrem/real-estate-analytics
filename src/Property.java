@@ -179,7 +179,6 @@ public class Property{
         double i = interestRate / 12;
         int n = mortgageLength * 12;
         monthlyPayment = getMortgage() * ((i*(Math.pow((1+i),n)))/(Math.pow((1+i),n)-1));
-        System.out.println(monthlyPayment);
     }
 
     public String toString(){
