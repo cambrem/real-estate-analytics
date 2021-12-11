@@ -4,11 +4,14 @@ public class Property{
     private String type;
     private int units;
     private double purchasePrice;
+
+    // mortgage details
     private double downPayment;
     private double mortgage;
     private double interestRate;
     private int mortgageLength;
     private double monthlyPayment;
+    private int balloonPeriod;
     private double equity;
 
     // income
@@ -170,12 +173,28 @@ public class Property{
         this.mortgageLength = mortgageLength;
     }
 
+    public int getBalloonPeriod() {
+        return balloonPeriod;
+    }
+
     public void setLoanDetails(double downPayment, int mortgageLength, double interestRate){
         this.downPayment = downPayment;
-        this.equity = downPayment;
-        this.mortgage = this.purchasePrice - downPayment;
         this.mortgageLength = mortgageLength;
         this.interestRate = interestRate;
+        this.equity = downPayment;
+        this.mortgage = this.purchasePrice - downPayment;
+        double i = interestRate / 12;
+        int n = mortgageLength * 12;
+        monthlyPayment = getMortgage() * ((i*(Math.pow((1+i),n)))/(Math.pow((1+i),n)-1));
+    }
+
+    public void setLoanDetails(double downPayment, int mortgageLength, int balloonPeriod, double interestRate){
+        this.downPayment = downPayment;
+        this.mortgageLength = mortgageLength;
+        this.balloonPeriod = balloonPeriod;
+        this.interestRate = interestRate;
+        this.equity = downPayment;
+        this.mortgage = this.purchasePrice - downPayment;
         double i = interestRate / 12;
         int n = mortgageLength * 12;
         monthlyPayment = getMortgage() * ((i*(Math.pow((1+i),n)))/(Math.pow((1+i),n)-1));
