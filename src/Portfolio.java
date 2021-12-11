@@ -77,7 +77,7 @@ public class Portfolio {
                 profit += cashFlow;
                 System.out.printf("Month " + month + ":  Cash flow: $%.2f   Cash return: $%.2f", cashFlow, profit);
                 for(Property p : properties){
-                    System.out.printf("   Mortgage Payment: $%.2f   Equity: $%.2f   Mortgage remaining: $%.2f", mortgagePayment, p.getEquity(), p.getMortgage());
+                    System.out.printf("   %s-- Mortgage Payment: $%.2f   Equity: $%.2f   Mortgage remaining: $%.2f", p.getAddress(), mortgagePayment, p.getEquity(), p.getMortgage());
                     System.out.println();
                 }
             }
