@@ -78,8 +78,8 @@ public class Portfolio {
                 System.out.printf("Month " + month + ":  Cash flow: $%.2f   Cash return: $%.2f", cashFlow, profit);
                 for(Property p : properties){
                     System.out.printf("   %s-- Mortgage Payment: $%.2f   Equity: $%.2f   Mortgage remaining: $%.2f", p.getAddress(), mortgagePayment, p.getEquity(), p.getMortgage());
-                    System.out.println();
                 }
+                System.out.println();
             }
         }
     }
@@ -95,6 +95,8 @@ public class Portfolio {
     public static void main(String [] args){
         Property NorthSt = new Property("304 North Street", "Multifamily", 4, 400_000, 4_000);
         NorthSt.setLoanDetails(40_000, 15, 0.01);
+        // Property SouthSt = new Property("34 South Street", "Multifamily", 4, 100_000, 1_200);
+        // SouthSt.setLoanDetails(10_000, 15, 0.01);
         // NorthSt.setLoanDetails(40_000, 15, 5, 0.05);
         Portfolio myPortfolio = new Portfolio(NorthSt);
         //System.out.println(myPortfolio);
