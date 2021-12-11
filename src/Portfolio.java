@@ -49,8 +49,8 @@ public class Portfolio {
                     principalPayment = p.getMortgage();
                     mortgagePayment = principalPayment + interestPayment;
                 }
-                System.out.printf("Interest payment: $%.2f  ", interestPayment);
-                System.out.printf("Principal payment: $%.2f    ", principalPayment);
+                // System.out.printf("Interest payment: $%.2f  ", interestPayment);
+                // System.out.printf("Principal payment: $%.2f    ", principalPayment);
                 p.payDownMortgage(principalPayment);
             }
             monthlyMortgagePayment += mortgagePayment;
@@ -75,7 +75,7 @@ public class Portfolio {
                 mortgagePayment = amortize();
                 setCashFlow(this.income, this.expenses, mortgagePayment);
                 profit += cashFlow;
-                System.out.printf("Month " + month + ":  Cash flow: $%.2f   Profit on original investment: $%.2f", cashFlow, profit);
+                System.out.printf("Month " + month + ":  Cash flow: $%.2f   Cash return: $%.2f", cashFlow, profit);
                 for(Property p : properties){
                     System.out.printf("   Mortgage Payment: $%.2f   Equity: $%.2f   Mortgage remaining: $%.2f", mortgagePayment, p.getEquity(), p.getMortgage());
                     System.out.println();
@@ -94,8 +94,8 @@ public class Portfolio {
 
     public static void main(String [] args){
         Property NorthSt = new Property("304 North Street", "Multifamily", 4, 400_000, 4_000);
-        // NorthSt.setLoanDetails(40_000, 15, 0.05);
-        NorthSt.setLoanDetails(40_000, 15, 5, 0.05);
+        NorthSt.setLoanDetails(40_000, 15, 0.01);
+        // NorthSt.setLoanDetails(40_000, 15, 5, 0.05);
         Portfolio myPortfolio = new Portfolio(NorthSt);
         //System.out.println(myPortfolio);
         myPortfolio.runSimulation(30);

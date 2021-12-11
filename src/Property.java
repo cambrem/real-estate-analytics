@@ -32,10 +32,10 @@ public class Property{
         this.purchasePrice = purchasePrice;
         this.rent = rent;
         this.propertyTax = purchasePrice * 0.0186 / 12;
-        this.insurance = purchasePrice * 0.01 / 12;
+        this.insurance = purchasePrice * 0.005 / 12;
         this.vacancy = rent * 0.05;
-        this.repairs = 100;
-        this.capX = 182.75;
+        this.repairs = purchasePrice * 0.0005;
+        this.capX = purchasePrice * 0.0005;
     }
 
     public String getAddress() {
